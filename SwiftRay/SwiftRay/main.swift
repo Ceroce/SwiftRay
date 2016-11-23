@@ -10,8 +10,9 @@ import Foundation
 
 print("SwiftRay")
 
-let width = 200
-let height = 100
+let Width = 200
+let Height = 100
+let Samples = 100
 
 func backgroundColor(ray: Ray) -> Vec3 {
     let unitDir = normalize(ray.direction)
@@ -30,21 +31,29 @@ func color(ray: Ray, world: [Hitable]) -> Vec3 {
     }
 }
 
+func random01() -> Float {
+    return Float(arc4random())/Float(UInt32.max)
+}
 
-let bitmap = Bitmap(width: width, height: height)
-let lowerLeft = Vec3(-2.0, -1.0, -1.0)
-let horizontal = Vec3(4.0, 0.0, 0.0)
-let vertical = Vec3(0.0, 2.0, 0.0)
-let origin = Vec3(0.0, 0.0, 0.0)
+
+let bitmap = Bitmap(width: Width, height: Height)
+let camera = Camera()
 let world: [Hitable] = [Sphere(center: Vec3(0.0, 0.0, -1.0), radius: 0.5),
                         Sphere(center: Vec3(0.0, -100.5, -1.0), radius: 100.0)]
 
 bitmap.generate { (x, y) -> PixelRGBU in
-    let u = Float(x)/Float(width)
-    let v = 1.0 - Float(y)/Float(height)
-    let ray = Ray(origin: origin, direction: lowerLeft + u*horizontal + v*vertical)
-    let col = color(ray: ray, world: world)
-    return PixelRGBU(r: col.x , g: col.y , b: col.z)
+    var colorSum = Vec3(0.0)
+    for sample in 0..<Samples {
+        let u = (Float(x)+random01()) / Float(Width)
+        let v = 1.0 - (Float(y)+random01()) / Float(Height)
+        let ray = camera.ray(u: u, v: v)
+        let col = color(ray: ray, world: world)
+        
+        colorSum = colorSum + col
+    }
+    
+    let colorAvg = colorSum / Float(Samples)
+    return PixelRGBU(r: colorAvg.x , g: colorAvg.y , b: colorAvg.z)
 }
 
 let path = "~/Desktop/Image.png"
