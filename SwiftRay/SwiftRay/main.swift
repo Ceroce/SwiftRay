@@ -12,7 +12,8 @@ print("SwiftRay")
 
 let Width = 200
 let Height = 100
-let Samples = 100
+let Samples = 10
+let DepthMax = 50
 
 func random01() -> Float {
     return Float(arc4random())/Float(UInt32.max)
@@ -41,7 +42,11 @@ func backgroundColor(ray: Ray) -> Vec3 {
     return mix(white, blue, t)
 }
 
-func color(ray: Ray, world: [Hitable]) -> Vec3 {
+func color(ray: Ray, world: [Hitable], depth: Int) -> Vec3 {
+    guard depth < DepthMax else {
+        return backgroundColor(ray: ray)
+    }
+    
     guard let intersection = closestHit(ray: ray, hitables: world) else {
         return backgroundColor(ray: ray)
     }
@@ -50,13 +55,17 @@ func color(ray: Ray, world: [Hitable]) -> Vec3 {
         return backgroundColor(ray: ray)
     }
 
-    return attenuation * color(ray: secondaryRay, world: world)
+    return attenuation * color(ray: secondaryRay, world: world, depth: depth+1)
 }
 
 let bitmap = Bitmap(width: Width, height: Height)
 let camera = Camera()
-let world: [Hitable] = [Sphere(center: Vec3(0.0, 0.0, -1.0), radius: 0.5, material: Lambertian(albedo: Vec3(0.5))),
-                        Sphere(center: Vec3(0.0, -100.5, -1.0), radius: 100.0, material: Lambertian(albedo: Vec3(0.5)))]
+let world: [Hitable] =
+    [Sphere(center: Vec3(0.0, 0.0, -1.0), radius: 0.5, material: Lambertian(albedo: Vec3(0.8, 0.3, 0.3))),
+     Sphere(center: Vec3(0.0, -100.5, -1.0), radius: 100.0, material: Lambertian(albedo: Vec3(0.8, 0.8, 0.0))),
+     Sphere(center: Vec3(1.0, 0.0, -1.0), radius: 0.5, material: Metal(albedo: Vec3(0.8, 0.6, 0.2))),
+     Sphere(center: Vec3(-1.0, 0.0, -1.0), radius: 0.5, material: Metal(albedo: Vec3(0.8, 0.8, 0.8)))
+]
 
 bitmap.generate { (x, y) -> PixelRGBU in
     var colorSum = Vec3(0.0)
@@ -64,7 +73,7 @@ bitmap.generate { (x, y) -> PixelRGBU in
         let u = (Float(x)+random01()) / Float(Width)
         let v = 1.0 - (Float(y)+random01()) / Float(Height)
         let ray = camera.ray(u: u, v: v)
-        let col = color(ray: ray, world: world)
+        let col = color(ray: ray, world: world, depth: 0)
         
         colorSum = colorSum + col
     }
