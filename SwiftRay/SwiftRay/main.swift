@@ -23,9 +23,11 @@ func backgroundColor(ray: Ray) -> Vec3 {
 }
 
 func color(ray: Ray, world: [Hitable]) -> Vec3 {
-    let intersection = closestHit(ray: ray, hitables: world)
-    if intersection != nil {
-        return 0.5 * (intersection!.normal + Vec3(1.0))
+    if let intersection = closestHit(ray: ray, hitables: world) {
+        let target = intersection.position + intersection.normal + randomPointInsideUnitSphere()
+        let secondaryRay = Ray(origin: intersection.position, direction: target-intersection.position)
+        let diffuse: Float = 0.5
+        return diffuse * color(ray: secondaryRay, world: world)
     } else {
         return backgroundColor(ray: ray)
     }
@@ -35,6 +37,14 @@ func random01() -> Float {
     return Float(arc4random())/Float(UInt32.max)
 }
 
+func randomMinus1Plus1() -> Float {
+    return 2.0 * random01() - 1.0
+}
+
+func randomPointInsideUnitSphere() -> Vec3 {
+    let radius = random01()
+    return radius * normalize(Vec3(randomMinus1Plus1(), randomMinus1Plus1(), randomMinus1Plus1()))
+}
 
 let bitmap = Bitmap(width: Width, height: Height)
 let camera = Camera()
