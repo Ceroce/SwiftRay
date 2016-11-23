@@ -62,11 +62,11 @@ func normalize(_ v: Vec3) -> Vec3 {
     return v / length(v)
 }
 
-func dot(_ u: Vec3, v: Vec3) -> Float {
+func dot(_ u: Vec3, _ v: Vec3) -> Float {
     return u.x*v.x + u.y*v.y + u.z*v.z
 }
 
-func cross(_ u: Vec3, v: Vec3) -> Float {
+func cross(_ u: Vec3, _ v: Vec3) -> Float {
     return u.x*v.y - v.x*u.y
         +  u.y*v.z - v.y*u.z
         +  u.z*v.x - v.z*u.x
