@@ -14,6 +14,25 @@ let Width = 200
 let Height = 100
 let Samples = 100
 
+func random01() -> Float {
+    return Float(arc4random())/Float(UInt32.max)
+}
+
+func randomMinus1Plus1() -> Float {
+    return 2.0 * random01() - 1.0
+}
+
+func randomPointInsideUnitSphere() -> Vec3 {
+    let radius = random01()
+    return radius * normalize(Vec3(randomMinus1Plus1(), randomMinus1Plus1(), randomMinus1Plus1()))
+}
+
+func toneMap(color: Vec3) -> Vec3 {
+    let gamma: Float = 2.0
+    let invGamma = 1.0/gamma
+    return Vec3(powf(color.x, invGamma), powf(color.y, invGamma), powf(color.z, invGamma))
+}
+
 func backgroundColor(ray: Ray) -> Vec3 {
     let unitDir = normalize(ray.direction)
     let t = 0.5 * (unitDir.y + 1.0)
@@ -33,19 +52,6 @@ func color(ray: Ray, world: [Hitable]) -> Vec3 {
     }
 }
 
-func random01() -> Float {
-    return Float(arc4random())/Float(UInt32.max)
-}
-
-func randomMinus1Plus1() -> Float {
-    return 2.0 * random01() - 1.0
-}
-
-func randomPointInsideUnitSphere() -> Vec3 {
-    let radius = random01()
-    return radius * normalize(Vec3(randomMinus1Plus1(), randomMinus1Plus1(), randomMinus1Plus1()))
-}
-
 let bitmap = Bitmap(width: Width, height: Height)
 let camera = Camera()
 let world: [Hitable] = [Sphere(center: Vec3(0.0, 0.0, -1.0), radius: 0.5),
@@ -63,7 +69,8 @@ bitmap.generate { (x, y) -> PixelRGBU in
     }
     
     let colorAvg = colorSum / Float(Samples)
-    return PixelRGBU(r: colorAvg.x , g: colorAvg.y , b: colorAvg.z)
+    let finalColor = toneMap(color: colorAvg)
+    return PixelRGBU(r: finalColor.x , g: finalColor.y , b: finalColor.z)
 }
 
 let path = "~/Desktop/Image.png"

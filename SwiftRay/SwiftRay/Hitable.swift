@@ -20,7 +20,7 @@ func closestHit(ray: Ray, hitables: [Hitable]) -> HitIntersection? {
     var closerIntersection: HitIntersection? = nil
     var closestSoFar: Float = Float.infinity
     for hitable in hitables {
-        if let intersection = hitable.hit(ray: ray, distMin: 0.0, distMax: closestSoFar) {
+        if let intersection = hitable.hit(ray: ray, distMin: 0.001, distMax: closestSoFar) {
             if intersection.distance < closestSoFar {
                 closestSoFar = intersection.distance
                 closerIntersection = intersection
