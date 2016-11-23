@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		DF36E5621DE49DF0008BF0DE /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF36E5611DE49DF0008BF0DE /* main.swift */; };
 		DF36E5691DE49E7D008BF0DE /* Bitmap.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF36E5681DE49E7D008BF0DE /* Bitmap.swift */; };
+		DF36E56B1DE5931D008BF0DE /* Vector.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF36E56A1DE5931D008BF0DE /* Vector.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -27,6 +28,7 @@
 		DF36E55E1DE49DF0008BF0DE /* SwiftRay */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = SwiftRay; sourceTree = BUILT_PRODUCTS_DIR; };
 		DF36E5611DE49DF0008BF0DE /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		DF36E5681DE49E7D008BF0DE /* Bitmap.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bitmap.swift; sourceTree = "<group>"; };
+		DF36E56A1DE5931D008BF0DE /* Vector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Vector.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +62,7 @@
 			isa = PBXGroup;
 			children = (
 				DF36E5611DE49DF0008BF0DE /* main.swift */,
+				DF36E56A1DE5931D008BF0DE /* Vector.swift */,
 				DF36E5681DE49E7D008BF0DE /* Bitmap.swift */,
 			);
 			path = SwiftRay;
@@ -125,6 +128,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DF36E5621DE49DF0008BF0DE /* main.swift in Sources */,
+				DF36E56B1DE5931D008BF0DE /* Vector.swift in Sources */,
 				DF36E5691DE49E7D008BF0DE /* Bitmap.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
