@@ -22,8 +22,11 @@ func backgroundColor(ray: Ray) -> Vec3 {
 }
 
 func color(ray: Ray) -> Vec3 {
-    if isSphereHitByRay(center: Vec3(0.0, 0.0, -1.0), radius: 0.5, ray: ray) {
-        return Vec3(1.0, 0.0, 0.0)
+    let sphereCenter = Vec3(0.0, 0.0, -1.0)
+    let t = distanceOfSphereHitByRay(center: sphereCenter, radius: 0.5, ray: ray)
+    if t > 0.0  {
+        let normal = normalize(ray.pointAt(distance: t) - sphereCenter)
+        return 0.5 * (normal + Vec3(1.0))
     } else {
         return backgroundColor(ray: ray)
     }
@@ -31,14 +34,18 @@ func color(ray: Ray) -> Vec3 {
 
 /* Determining where a ray hits a sphere is solving a second order equation:
    t^2.dot(B,B) + 2t.dot(B, A-C) + dot(A-C, A-C) - R^2 = 0 */
-func isSphereHitByRay(center: Vec3, radius: Float, ray: Ray) -> Bool {
+func distanceOfSphereHitByRay(center: Vec3, radius: Float, ray: Ray) -> Float {
     let oc: Vec3 = ray.origin - center
     let a = dot(ray.direction, ray.direction)
     let b = 2.0 * dot(ray.direction, oc)
     let c = dot(oc, oc) - radius*radius
     let det = b*b - 4.0*a*c
     
-    return det > 0.0
+    if det < 0 {
+        return -1.0
+    } else {
+        return (-b - sqrtf(det)) / (2.0 * a)
+    }
 }
 
 let bitmap = Bitmap(width: width, height: height)

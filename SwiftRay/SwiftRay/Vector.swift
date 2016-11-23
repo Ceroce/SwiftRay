@@ -18,6 +18,12 @@ struct Vec3 {
         self.y = y
         self.z = z
     }
+    
+    init(_ f: Float) {
+        self.x = f
+        self.y = f
+        self.z = f
+    }
 }
 
 extension Vec3 {
@@ -55,7 +61,7 @@ func squaredLength(_ v: Vec3) -> Float {
 }
 
 func length(_ v: Vec3) -> Float {
-    return sqrt(squaredLength(v))
+    return sqrtf(squaredLength(v))
 }
 
 func normalize(_ v: Vec3) -> Vec3 {
