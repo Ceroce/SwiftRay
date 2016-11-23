@@ -42,20 +42,21 @@ func backgroundColor(ray: Ray) -> Vec3 {
 }
 
 func color(ray: Ray, world: [Hitable]) -> Vec3 {
-    if let intersection = closestHit(ray: ray, hitables: world) {
-        let target = intersection.position + intersection.normal + randomPointInsideUnitSphere()
-        let secondaryRay = Ray(origin: intersection.position, direction: target-intersection.position)
-        let diffuse: Float = 0.5
-        return diffuse * color(ray: secondaryRay, world: world)
-    } else {
+    guard let intersection = closestHit(ray: ray, hitables: world) else {
         return backgroundColor(ray: ray)
     }
+    
+    guard let (secondaryRay, attenuation) = intersection.material.scatteredRay(ray: ray, intersection: intersection) else {
+        return backgroundColor(ray: ray)
+    }
+
+    return attenuation * color(ray: secondaryRay, world: world)
 }
 
 let bitmap = Bitmap(width: Width, height: Height)
 let camera = Camera()
-let world: [Hitable] = [Sphere(center: Vec3(0.0, 0.0, -1.0), radius: 0.5),
-                        Sphere(center: Vec3(0.0, -100.5, -1.0), radius: 100.0)]
+let world: [Hitable] = [Sphere(center: Vec3(0.0, 0.0, -1.0), radius: 0.5, material: Lambertian(albedo: Vec3(0.5))),
+                        Sphere(center: Vec3(0.0, -100.5, -1.0), radius: 100.0, material: Lambertian(albedo: Vec3(0.5)))]
 
 bitmap.generate { (x, y) -> PixelRGBU in
     var colorSum = Vec3(0.0)

@@ -10,6 +10,7 @@ struct HitIntersection {
     let distance: Float // Distance from the origin of the ray
     let position: Vec3
     let normal: Vec3
+    let material: Material
 }
 
 protocol Hitable {
