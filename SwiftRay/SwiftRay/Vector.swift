@@ -37,6 +37,10 @@ extension Vec3 {
         return Vec3(v.x * f, v.y * f, v.z * f)
     }
     
+    static func * (f: Float, v: Vec3) -> Vec3 {
+        return v * f
+    }
+    
     static func / (u: Vec3, v: Vec3) -> Vec3 {
         return Vec3(u.x / v.x, u.y / v.y, u.z / v.z)
     }
@@ -44,26 +48,30 @@ extension Vec3 {
     static func / (v: Vec3, f: Float) -> Vec3 {
         return Vec3(v.x / f, v.y / f, v.z / f)
     }
-    
-    static func squaredLength(_ v: Vec3) -> Float {
-        return v.x*v.x + v.y*v.y + v.z*v.z
-    }
-    
-    static func length(_ v: Vec3) -> Float {
-        return sqrt(squaredLength(v))
-    }
-    
-    static func normalize(_ v: Vec3) -> Vec3 {
-        return v / length(v)
-    }
-    
-    static func dot(_ u: Vec3, v: Vec3) -> Float {
-        return u.x*v.x + u.y*v.y + u.z*v.z
-    }
-    
-    static func cross(_ u: Vec3, v: Vec3) -> Float {
-        return u.x*v.y - v.x*u.y
-            +  u.y*v.z - v.y*u.z
-            +  u.z*v.x - v.z*u.x
-    }
+}
+
+func squaredLength(_ v: Vec3) -> Float {
+    return v.x*v.x + v.y*v.y + v.z*v.z
+}
+
+func length(_ v: Vec3) -> Float {
+    return sqrt(squaredLength(v))
+}
+
+func normalize(_ v: Vec3) -> Vec3 {
+    return v / length(v)
+}
+
+func dot(_ u: Vec3, v: Vec3) -> Float {
+    return u.x*v.x + u.y*v.y + u.z*v.z
+}
+
+func cross(_ u: Vec3, v: Vec3) -> Float {
+    return u.x*v.y - v.x*u.y
+        +  u.y*v.z - v.y*u.z
+        +  u.z*v.x - v.z*u.x
+}
+
+func mix(_ u: Vec3, _ v: Vec3, _ alpha: Float) -> Vec3 {
+    return (1.0-alpha)*u + alpha*v
 }
