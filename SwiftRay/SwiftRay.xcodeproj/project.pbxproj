@@ -17,6 +17,7 @@
 		DF36E5751DE5E1B3008BF0DE /* Material.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF36E5741DE5E1B3008BF0DE /* Material.swift */; };
 		DF36E5771DE5E346008BF0DE /* Lambertian.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF36E5761DE5E346008BF0DE /* Lambertian.swift */; };
 		DF36E5791DE5FE1D008BF0DE /* Metal.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF36E5781DE5FE1D008BF0DE /* Metal.swift */; };
+		DF36E57C1DE6DF48008BF0DE /* Dielectric.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF36E57B1DE6DF48008BF0DE /* Dielectric.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -43,6 +44,7 @@
 		DF36E5741DE5E1B3008BF0DE /* Material.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Material.swift; sourceTree = "<group>"; };
 		DF36E5761DE5E346008BF0DE /* Lambertian.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Lambertian.swift; sourceTree = "<group>"; };
 		DF36E5781DE5FE1D008BF0DE /* Metal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Metal.swift; sourceTree = "<group>"; };
+		DF36E57B1DE6DF48008BF0DE /* Dielectric.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dielectric.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,6 +95,7 @@
 				DF36E5741DE5E1B3008BF0DE /* Material.swift */,
 				DF36E5761DE5E346008BF0DE /* Lambertian.swift */,
 				DF36E5781DE5FE1D008BF0DE /* Metal.swift */,
+				DF36E57B1DE6DF48008BF0DE /* Dielectric.swift */,
 			);
 			name = Materials;
 			sourceTree = "<group>";
@@ -156,6 +159,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DF36E57C1DE6DF48008BF0DE /* Dielectric.swift in Sources */,
 				DF36E5751DE5E1B3008BF0DE /* Material.swift in Sources */,
 				DF36E56D1DE5A1D3008BF0DE /* Ray.swift in Sources */,
 				DF36E5621DE49DF0008BF0DE /* main.swift in Sources */,
