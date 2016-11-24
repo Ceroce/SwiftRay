@@ -8,9 +8,10 @@
 
 struct Metal : Material {
     let albedo: Vec3
+    let fuzz: Float
     
     func scatteredRay(ray: Ray, intersection: HitIntersection) -> (Ray, Vec3)? {
-        let reflected = reflect(v: normalize(ray.direction), normal: intersection.normal)
+        let reflected = reflect(v: normalize(ray.direction), normal: intersection.normal) + randomPointInsideUnitSphere()*fuzz
         if dot(reflected, intersection.normal) > 0.0 { // The ray is not tangent to the surface
             let scattered = Ray(origin: intersection.position, direction: reflected)
             return (scattered, albedo)
