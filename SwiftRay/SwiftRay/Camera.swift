@@ -14,23 +14,43 @@ struct Camera {
     let horizontal: Vec3
     let vertical: Vec3
     
+    let u: Vec3
+    let v: Vec3
+    
+    let aperture: Float
+    
     // yFov in degres. aspectRatio = width/height
-    init(lookFrom: Vec3, lookAt: Vec3, up: Vec3, yFov: Float, aspectRatio: Float) {
+    init(lookFrom: Vec3, lookAt: Vec3, up: Vec3, yFov: Float, aspectRatio: Float, aperture: Float, focusDistance: Float) {
         self.lookFrom = lookFrom
+        self.aperture = aperture
         
         let theta = rad(yFov)
         let halfHeight = tanf(theta/2)
         let halfWidth = aspectRatio * halfHeight
         
         let w = normalize(lookFrom - lookAt) // Direction of the camera
-        let u = normalize(cross(up, w))
-        let v = cross(w, u)
-        lowerLeft = lookFrom - halfWidth*u - halfHeight*v - w
-        horizontal = 2 * halfWidth * u
-        vertical = 2 * halfHeight * v
+        u = normalize(cross(up, w))
+        v = cross(w, u)
+        lowerLeft = lookFrom - halfWidth*focusDistance*u - halfHeight*focusDistance*v - focusDistance*w
+        horizontal = 2 * halfWidth * focusDistance * u
+        vertical = 2 * halfHeight * focusDistance * v
     }
     
-    func ray(u: Float, v: Float) -> Ray {
-        return Ray(origin: lookFrom, direction: lowerLeft + u*horizontal + v*vertical - lookFrom)
+    func ray(s: Float, t: Float) -> Ray {
+        // Depth of field is simulated by offsetting the origin of the ray randomly
+        let defocus = (aperture/2.0) * randPointOnUnitDisc()
+        let offset: Vec3 = u * defocus.x + v * defocus.y
+        return Ray(origin: lookFrom+offset, direction: lowerLeft + s*horizontal + t*vertical - lookFrom - offset)
     }
+    
+    // Uses a rejection method
+    func randPointOnUnitDisc() -> Vec3 {
+        var p: Vec3
+        repeat {
+            p = 2 * Vec3(random01(), random01(), 0) - Vec3(1, 1, 0)
+        } while dot(p, p) >= 1.0
+        return p
+    }
+    
+    
 }

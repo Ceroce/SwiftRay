@@ -59,7 +59,10 @@ func color(ray: Ray, world: [Hitable], depth: Int) -> Vec3 {
 }
 
 let bitmap = Bitmap(width: Width, height: Height)
-let camera = Camera(lookFrom: Vec3(-2, 2, 1), lookAt: Vec3(0, 0, -1), up: Vec3(0, 1, 0), yFov: 30, aspectRatio: Float(Width)/Float(Height))
+let lookFrom = Vec3(-2, 2, 1)
+let lookAt = Vec3(0, 0, -1)
+let focusDistance = length(lookAt - lookFrom)
+let camera = Camera(lookFrom: lookFrom, lookAt: lookAt, up: Vec3(0, 1, 0), yFov: 30, aspectRatio: Float(Width)/Float(Height), aperture: 0.5, focusDistance: focusDistance)
 let world: [Hitable] =
     [Sphere(center: Vec3(0.0, 0.0, -1.0), radius: 0.5, material: Lambertian(albedo: Vec3(0.1, 0.2, 0.5))),
      Sphere(center: Vec3(0.0, -100.5, -1.0), radius: 100.0, material: Lambertian(albedo: Vec3(0.8, 0.8, 0.0))),
@@ -71,9 +74,9 @@ let startDate = Date()
 bitmap.generate { (x, y) -> PixelRGBU in
     var colorSum = Vec3(0.0)
     for sample in 0..<Samples {
-        let u = (Float(x)+random01()) / Float(Width)
-        let v = 1.0 - (Float(y)+random01()) / Float(Height)
-        let ray = camera.ray(u: u, v: v)
+        let s = (Float(x)+random01()) / Float(Width)
+        let t = 1.0 - (Float(y)+random01()) / Float(Height)
+        let ray = camera.ray(s: s, t: t)
         let col = color(ray: ray, world: world, depth: 0)
         
         colorSum = colorSum + col
