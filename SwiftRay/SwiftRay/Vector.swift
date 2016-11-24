@@ -72,10 +72,10 @@ func dot(_ u: Vec3, _ v: Vec3) -> Float {
     return u.x*v.x + u.y*v.y + u.z*v.z
 }
 
-func cross(_ u: Vec3, _ v: Vec3) -> Float {
-    return u.x*v.y - v.x*u.y
-        +  u.y*v.z - v.y*u.z
-        +  u.z*v.x - v.z*u.x
+func cross(_ u: Vec3, _ v: Vec3) -> Vec3 {
+    return Vec3(u.y * v.z - v.y * u.z,
+                u.z * v.x - v.z * u.x,
+                u.x * v.y - v.x * u.y)
 }
 
 func mix(_ u: Vec3, _ v: Vec3, _ alpha: Float) -> Vec3 {

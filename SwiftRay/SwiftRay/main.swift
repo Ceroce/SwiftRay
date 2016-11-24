@@ -59,7 +59,7 @@ func color(ray: Ray, world: [Hitable], depth: Int) -> Vec3 {
 }
 
 let bitmap = Bitmap(width: Width, height: Height)
-let camera = Camera(yFov: 60, aspectRatio: Float(Width)/Float(Height))
+let camera = Camera(lookFrom: Vec3(-2, 2, 1), lookAt: Vec3(0, 0, -1), up: Vec3(0, 1, 0), yFov: 30, aspectRatio: Float(Width)/Float(Height))
 let world: [Hitable] =
     [Sphere(center: Vec3(0.0, 0.0, -1.0), radius: 0.5, material: Lambertian(albedo: Vec3(0.1, 0.2, 0.5))),
      Sphere(center: Vec3(0.0, -100.5, -1.0), radius: 100.0, material: Lambertian(albedo: Vec3(0.8, 0.8, 0.0))),
