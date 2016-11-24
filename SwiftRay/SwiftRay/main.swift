@@ -67,6 +67,7 @@ let world: [Hitable] =
      Sphere(center: Vec3(-1.0, 0.0, -1.0), radius: 0.5, material: Dielectric(refractionIndex: 1.5))
 ]
 
+let startDate = Date()
 bitmap.generate { (x, y) -> PixelRGBU in
     var colorSum = Vec3(0.0)
     for sample in 0..<Samples {
@@ -82,6 +83,9 @@ bitmap.generate { (x, y) -> PixelRGBU in
     let finalColor = toneMap(color: colorAvg)
     return PixelRGBU(r: finalColor.x , g: finalColor.y , b: finalColor.z)
 }
+let renderingDuration = Date().timeIntervalSince(startDate)
+print("Image rendered in \(renderingDuration) s.")
+
 
 let path = "~/Desktop/Image.png"
 let url = URL(fileURLWithPath: NSString(string: path).expandingTildeInPath)

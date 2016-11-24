@@ -29,24 +29,39 @@ struct Dielectric: Material {
         
         var outwardNormal: Vec3
         var niOverNt: Float
+        var cosine: Float
         if dot(ray.direction, intersection.normal) > 0 {
             outwardNormal = -1.0 * intersection.normal
             niOverNt = refractionIndex
+            cosine = refractionIndex * dot(ray.direction, intersection.normal) / length(ray.direction)
         } else {
             outwardNormal = intersection.normal
             niOverNt = RefractionIndex.Air.rawValue/refractionIndex
+            cosine = -dot(ray.direction, intersection.normal) / length(ray.direction)
         }
     
+        let reflected = reflect(v: ray.direction, normal: intersection.normal)
         if let refracted = refract(v: ray.direction, normal: outwardNormal, niOverNt: niOverNt) {
-            return (Ray(origin: intersection.position, direction: refracted), attenuation)
+            let reflectProb = schlick(cosine: cosine, refrIndex: refractionIndex)
+            if random01() < reflectProb {
+                return (Ray(origin: intersection.position, direction: reflected), attenuation)
+            } else {
+                return (Ray(origin: intersection.position, direction: refracted), attenuation)
+            }
         } else {
-            let reflected = reflect(v: ray.direction, normal: intersection.normal)
             return (Ray(origin: intersection.position, direction: reflected), attenuation)
         }
     }
     
     private func reflect(v: Vec3, normal: Vec3) -> Vec3 {
         return v - 2.0 * dot(v, normal) * normal
+    }
+    
+    // Simulate that the reflectivity varies with angle
+    private func schlick(cosine: Float, refrIndex: Float) -> Float {
+        let r = (1-refrIndex) / (1+refrIndex)
+        let r2 = r * r
+        return r2 + (1-r2)*powf((1-cosine), 5.0)
     }
     
     private func refract(v: Vec3, normal: Vec3, niOverNt: Float) -> Vec3? {
