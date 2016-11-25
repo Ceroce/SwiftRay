@@ -10,10 +10,10 @@ import Foundation
 
 print("SwiftRay")
 
-let Width = 200
-let Height = 100
-let Samples = 100
-let DepthMax = 50
+let Width = 400     // Width of the generated image
+let Height = 266    // Height of the generated image
+let Samples = 100   // Number of rays for each pixel
+let DepthMax = 50   // Maximum number of scattered rays
 
 func random01() -> Float {
     return Float(arc4random())/Float(UInt32.max)
@@ -59,16 +59,12 @@ func color(ray: Ray, world: [Hitable], depth: Int) -> Vec3 {
 }
 
 let bitmap = Bitmap(width: Width, height: Height)
-let lookFrom = Vec3(-2, 2, 1)
-let lookAt = Vec3(0, 0, -1)
-let focusDistance = length(lookAt - lookFrom)
-let camera = Camera(lookFrom: lookFrom, lookAt: lookAt, up: Vec3(0, 1, 0), yFov: 30, aspectRatio: Float(Width)/Float(Height), aperture: 0.5, focusDistance: focusDistance)
-let world: [Hitable] =
-    [Sphere(center: Vec3(0.0, 0.0, -1.0), radius: 0.5, material: Lambertian(albedo: Vec3(0.1, 0.2, 0.5))),
-     Sphere(center: Vec3(0.0, -100.5, -1.0), radius: 100.0, material: Lambertian(albedo: Vec3(0.8, 0.8, 0.0))),
-     Sphere(center: Vec3(1.0, 0.0, -1.0), radius: 0.5, material: Metal(albedo: Vec3(0.8, 0.6, 0.2), fuzz: 0.0)),
-     Sphere(center: Vec3(-1.0, 0.0, -1.0), radius: 0.5, material: Dielectric(refractionIndex: 1.5))
-]
+let lookFrom = Vec3(13, 2, 3)
+let lookAt = Vec3(0, 0, 0)
+let focusDistance: Float = 10.0 // length(lookAt - lookFrom)
+let camera = Camera(lookFrom: lookFrom, lookAt: lookAt, up: Vec3(0, 1, 0), yFov: 20, aspectRatio: Float(Width)/Float(Height), aperture: 0.1, focusDistance: focusDistance)
+
+let world = Scene().world
 
 let startDate = Date()
 bitmap.generate { (x, y) -> PixelRGBU in
