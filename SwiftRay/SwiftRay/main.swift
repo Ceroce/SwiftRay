@@ -12,7 +12,7 @@ print("SwiftRay")
 
 let Width = 200     // Width of the generated image
 let Height = 100    // Height of the generated image
-let Samples = 1   // Number of rays for each pixel
+let Samples = 10   // Number of rays for each pixel
 let DepthMax = 50   // Maximum number of scattered rays
 
 func random01() -> Float {
@@ -59,12 +59,9 @@ func color(ray: Ray, world: [Hitable], depth: Int) -> Vec3 {
 }
 
 let bitmap = Bitmap(width: Width, height: Height)
-let lookFrom = Vec3(13, 2, 3)
-let lookAt = Vec3(0, 0, 0)
-let focusDistance: Float = 10.0 // length(lookAt - lookFrom)
-let camera = Camera(lookFrom: lookFrom, lookAt: lookAt, up: Vec3(0, 1, 0), yFov: 20, aspectRatio: Float(Width)/Float(Height), aperture: 0.1, focusDistance: focusDistance)
 
-let world = BigAndSmallSpheresScene().hitables
+
+let scene = BigAndSmallSpheresScene(aspectRatio: Float(Width)/Float(Height))
 
 let startDate = Date()
 bitmap.generate { (x, y) -> PixelRGBU in
@@ -72,8 +69,8 @@ bitmap.generate { (x, y) -> PixelRGBU in
     for sample in 0..<Samples {
         let s = (Float(x)+random01()) / Float(Width)
         let t = 1.0 - (Float(y)+random01()) / Float(Height)
-        let ray = camera.ray(s: s, t: t)
-        let col = color(ray: ray, world: world, depth: 0)
+        let ray = scene.camera.ray(s: s, t: t)
+        let col = color(ray: ray, world: scene.hitables, depth: 0)
         
         colorSum = colorSum + col
     }

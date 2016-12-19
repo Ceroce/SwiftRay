@@ -9,9 +9,12 @@
 import Foundation
 
 struct BigAndSmallSpheresScene: Scene {
+    let camera: Camera
     let hitables: [Hitable]
     
-    init() {
+    init(aspectRatio: Float) {
+        self.camera = Camera(lookFrom: Vec3(13, 2, 3), lookAt: Vec3(0, 0, 0), up: Vec3(0, 1, 0), yFov: 20, aspectRatio: aspectRatio, aperture: 0.1, focusDistance: 10.0)
+        
         var spheres: [Hitable] = []
         
         // Ground

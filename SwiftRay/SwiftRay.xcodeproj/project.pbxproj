@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		DF1874B51E08411F001D9CE8 /* BigAndSmallSpheresScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF1874B41E08411F001D9CE8 /* BigAndSmallSpheresScene.swift */; };
+		DF1874B81E0841E2001D9CE8 /* SimpleScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF1874B71E0841E2001D9CE8 /* SimpleScene.swift */; };
 		DF36E5621DE49DF0008BF0DE /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF36E5611DE49DF0008BF0DE /* main.swift */; };
 		DF36E5691DE49E7D008BF0DE /* Bitmap.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF36E5681DE49E7D008BF0DE /* Bitmap.swift */; };
 		DF36E56B1DE5931D008BF0DE /* Vector.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF36E56A1DE5931D008BF0DE /* Vector.swift */; };
@@ -37,6 +38,7 @@
 
 /* Begin PBXFileReference section */
 		DF1874B41E08411F001D9CE8 /* BigAndSmallSpheresScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BigAndSmallSpheresScene.swift; sourceTree = "<group>"; };
+		DF1874B71E0841E2001D9CE8 /* SimpleScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimpleScene.swift; sourceTree = "<group>"; };
 		DF36E55E1DE49DF0008BF0DE /* SwiftRay */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = SwiftRay; sourceTree = BUILT_PRODUCTS_DIR; };
 		DF36E5611DE49DF0008BF0DE /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		DF36E5681DE49E7D008BF0DE /* Bitmap.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bitmap.swift; sourceTree = "<group>"; };
@@ -68,6 +70,7 @@
 			isa = PBXGroup;
 			children = (
 				DF36E57F1DE735C2008BF0DE /* Scene.swift */,
+				DF1874B71E0841E2001D9CE8 /* SimpleScene.swift */,
 				DF1874B41E08411F001D9CE8 /* BigAndSmallSpheresScene.swift */,
 			);
 			name = Scenes;
@@ -187,6 +190,7 @@
 				DF1874B51E08411F001D9CE8 /* BigAndSmallSpheresScene.swift in Sources */,
 				DF36E5731DE5CF12008BF0DE /* Camera.swift in Sources */,
 				DF36E57E1DE6F7B2008BF0DE /* Trigonometry.swift in Sources */,
+				DF1874B81E0841E2001D9CE8 /* SimpleScene.swift in Sources */,
 				DF36E5791DE5FE1D008BF0DE /* Metal.swift in Sources */,
 				DF36E56F1DE5AC6B008BF0DE /* Hitable.swift in Sources */,
 				DF36E5771DE5E346008BF0DE /* Lambertian.swift in Sources */,

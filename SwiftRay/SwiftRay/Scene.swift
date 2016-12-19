@@ -7,5 +7,8 @@
 //
 
 protocol Scene {
+    var camera: Camera {get}
     var hitables: [Hitable] {get}
+    
+    init(aspectRatio: Float)
 }
