@@ -10,9 +10,9 @@ import Foundation
 
 print("SwiftRay")
 
-let Width = 400     // Width of the generated image
-let Height = 266    // Height of the generated image
-let Samples = 100   // Number of rays for each pixel
+let Width = 200     // Width of the generated image
+let Height = 100    // Height of the generated image
+let Samples = 1   // Number of rays for each pixel
 let DepthMax = 50   // Maximum number of scattered rays
 
 func random01() -> Float {
@@ -64,7 +64,7 @@ let lookAt = Vec3(0, 0, 0)
 let focusDistance: Float = 10.0 // length(lookAt - lookFrom)
 let camera = Camera(lookFrom: lookFrom, lookAt: lookAt, up: Vec3(0, 1, 0), yFov: 20, aspectRatio: Float(Width)/Float(Height), aperture: 0.1, focusDistance: focusDistance)
 
-let world = Scene().world
+let world = BigAndSmallSpheresScene().hitables
 
 let startDate = Date()
 bitmap.generate { (x, y) -> PixelRGBU in

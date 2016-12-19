@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DF1874B51E08411F001D9CE8 /* BigAndSmallSpheresScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF1874B41E08411F001D9CE8 /* BigAndSmallSpheresScene.swift */; };
 		DF36E5621DE49DF0008BF0DE /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF36E5611DE49DF0008BF0DE /* main.swift */; };
 		DF36E5691DE49E7D008BF0DE /* Bitmap.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF36E5681DE49E7D008BF0DE /* Bitmap.swift */; };
 		DF36E56B1DE5931D008BF0DE /* Vector.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF36E56A1DE5931D008BF0DE /* Vector.swift */; };
@@ -35,6 +36,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		DF1874B41E08411F001D9CE8 /* BigAndSmallSpheresScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BigAndSmallSpheresScene.swift; sourceTree = "<group>"; };
 		DF36E55E1DE49DF0008BF0DE /* SwiftRay */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = SwiftRay; sourceTree = BUILT_PRODUCTS_DIR; };
 		DF36E5611DE49DF0008BF0DE /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		DF36E5681DE49E7D008BF0DE /* Bitmap.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Bitmap.swift; sourceTree = "<group>"; };
@@ -62,6 +64,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		DF1874B61E084124001D9CE8 /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				DF36E57F1DE735C2008BF0DE /* Scene.swift */,
+				DF1874B41E08411F001D9CE8 /* BigAndSmallSpheresScene.swift */,
+			);
+			name = Scenes;
+			sourceTree = "<group>";
+		};
 		DF36E5551DE49DF0008BF0DE = {
 			isa = PBXGroup;
 			children = (
@@ -82,10 +93,10 @@
 			isa = PBXGroup;
 			children = (
 				DF36E5611DE49DF0008BF0DE /* main.swift */,
+				DF1874B61E084124001D9CE8 /* Scenes */,
 				DF36E5701DE5ADDE008BF0DE /* Sphere.swift */,
 				DF36E5721DE5CF12008BF0DE /* Camera.swift */,
 				DF36E56E1DE5AC6B008BF0DE /* Hitable.swift */,
-				DF36E57F1DE735C2008BF0DE /* Scene.swift */,
 				DF36E57A1DE5FE29008BF0DE /* Materials */,
 				DF36E56A1DE5931D008BF0DE /* Vector.swift */,
 				DF36E57D1DE6F7B2008BF0DE /* Trigonometry.swift */,
@@ -133,7 +144,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0810;
-				LastUpgradeCheck = 0810;
+				LastUpgradeCheck = 0820;
 				ORGANIZATIONNAME = "Céroce";
 				TargetAttributes = {
 					DF36E55D1DE49DF0008BF0DE = {
@@ -173,6 +184,7 @@
 				DF36E5711DE5ADDE008BF0DE /* Sphere.swift in Sources */,
 				DF36E56B1DE5931D008BF0DE /* Vector.swift in Sources */,
 				DF36E5691DE49E7D008BF0DE /* Bitmap.swift in Sources */,
+				DF1874B51E08411F001D9CE8 /* BigAndSmallSpheresScene.swift in Sources */,
 				DF36E5731DE5CF12008BF0DE /* Camera.swift in Sources */,
 				DF36E57E1DE6F7B2008BF0DE /* Trigonometry.swift in Sources */,
 				DF36E5791DE5FE1D008BF0DE /* Metal.swift in Sources */,
@@ -202,6 +214,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -250,6 +263,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -269,6 +283,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = macosx;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 			};
 			name = Release;
 		};
@@ -309,6 +324,7 @@
 				DF36E5671DE49DF0008BF0DE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
