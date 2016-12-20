@@ -46,28 +46,19 @@ func toneMap(color: PixelRGB32) -> PixelRGBU8 {
 
 // *** Main ***
 
+let scene = SimpleScene(aspectRatio: Float(Width)/Float(Height))
+
 print("SwiftRay")
 let imagePath = "~/Desktop/Image.png"
 let url = URL(fileURLWithPath: NSString(string: imagePath).expandingTildeInPath)
 print("Generating image (\(Width) by \(Height)) at \(imagePath)")
+let startDate = Date()
 
 let bitmap = Bitmap(width: Width, height: Height)
 let accumulator = ImageAccumulator()
+let imageSavingQueue = DispatchQueue(label: "SwiftRay image file saving") // Serial queue
 
-let scene = SimpleScene(aspectRatio: Float(Width)/Float(Height))
-
-let startDate = Date()
-for sample in 0..<Samples {
-    let image = Image(width: Width, height: Height)
-    image.generate { (x, y) -> PixelRGB32 in
-        let s = (Float(x)+random01()) / Float(Width)
-        let t = 1.0 - (Float(y)+random01()) / Float(Height)
-        let ray = scene.camera.ray(s: s, t: t)
-        let col = color(ray: ray, world: scene.hitables, depth: 0)
-        
-        return PixelRGB32(r: col.x, g: col.y, b: col.z)
-    }
-    
+func save(image: Image) {
     let accumulatedImage =  accumulator.accumulate(image: image)
     bitmap.generate { (x, y) -> PixelRGBU8 in
         return toneMap(color: accumulatedImage.pixelAt(x: x, y: y))
@@ -75,13 +66,45 @@ for sample in 0..<Samples {
     
     if !bitmap.writePng(url: url) {
         print("Error saving image at \(imagePath).")
-        break
     }
-    
-    let renderingDuration = Date().timeIntervalSince(startDate)
-    let progress = (Float(sample+1)/Float(Samples))*100.0
-    print("Sample \(sample+1)/\(Samples) (\(progress) %) in \(renderingDuration) s.")
 }
+func printProgress(sampleIndex: Int, sampleCount:Int) {
+    let progress = (Float(sampleIndex+1)/Float(sampleCount))*100.0
+    print("Sample \(sampleIndex+1)/\(sampleCount) (\(progress) %)")
+}
+
+
+
+let raytracingQueue = DispatchQueue.global() // Parallel queue
+let dispatchGroup = DispatchGroup()
+
+var samplesRendered = 0;
+for sample in 0..<Samples {
+    raytracingQueue.async {
+        dispatchGroup.enter()
+        let image = Image(width: Width, height: Height)
+        image.generate { (x, y) -> PixelRGB32 in
+            let s = (Float(x)+random01()) / Float(Width)
+            let t = 1.0 - (Float(y)+random01()) / Float(Height)
+            let ray = scene.camera.ray(s: s, t: t)
+            let col = color(ray: ray, world: scene.hitables, depth: 0)
+            
+            return PixelRGB32(r: col.x, g: col.y, b: col.z)
+        }
+        
+        imageSavingQueue.async {
+            save(image: image)
+            printProgress(sampleIndex: samplesRendered, sampleCount: Samples)
+            samplesRendered += 1
+            dispatchGroup.leave()
+        }
+    }
+}
+
+
+dispatchGroup.wait()
+let renderingDuration = Date().timeIntervalSince(startDate)
+print("Image rendered in \(renderingDuration) s.")
 
 
 
