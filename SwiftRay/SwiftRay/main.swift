@@ -8,14 +8,10 @@
 
 import Foundation
 
-print("SwiftRay")
-
 let Width = 200     // Width of the generated image
 let Height = 100    // Height of the generated image
 let Samples = 10   // Number of rays for each pixel
 let DepthMax = 50   // Maximum number of scattered rays
-
-
 
 
 func backgroundColor(ray: Ray) -> Vec3 {
@@ -42,50 +38,51 @@ func color(ray: Ray, world: [Hitable], depth: Int) -> Vec3 {
     return attenuation * color(ray: secondaryRay, world: world, depth: depth+1)
 }
 
-let image = Image(width: Width, height: Height)
-let bitmap = Bitmap(width: Width, height: Height)
-
-
-let scene = SimpleScene(aspectRatio: Float(Width)/Float(Height))
-
-let startDate = Date()
-image.generate { (x, y) -> PixelRGB32 in
-    var colorSum = Vec3(0.0)
-    for sample in 0..<Samples {
-        let s = (Float(x)+random01()) / Float(Width)
-        let t = 1.0 - (Float(y)+random01()) / Float(Height)
-        let ray = scene.camera.ray(s: s, t: t)
-        let col = color(ray: ray, world: scene.hitables, depth: 0)
-        
-        colorSum = colorSum + col
-    }
-    
-    let colorAvg = colorSum / Float(Samples)
-    return PixelRGB32(r: colorAvg.x, g: colorAvg.y, b: colorAvg.z)
-}
-
-
 func toneMap(color: PixelRGB32) -> PixelRGBU8 {
     let gamma: Float = 2.0
     let invGamma = 1.0/gamma
     return PixelRGBU8(r: powf(color.r, invGamma), g: powf(color.g, invGamma), b: powf(color.b, invGamma))
 }
 
-bitmap.generate { (x, y) -> PixelRGBU8 in
-    return toneMap(color: image.pixelAt(x: x, y: y))
+// *** Main ***
+
+print("SwiftRay")
+let imagePath = "~/Desktop/Image.png"
+let url = URL(fileURLWithPath: NSString(string: imagePath).expandingTildeInPath)
+print("Generating image (\(Width) by \(Height)) at \(imagePath)")
+
+let bitmap = Bitmap(width: Width, height: Height)
+let accumulator = ImageAccumulator()
+
+let scene = SimpleScene(aspectRatio: Float(Width)/Float(Height))
+
+let startDate = Date()
+for sample in 0..<Samples {
+    let image = Image(width: Width, height: Height)
+    image.generate { (x, y) -> PixelRGB32 in
+        let s = (Float(x)+random01()) / Float(Width)
+        let t = 1.0 - (Float(y)+random01()) / Float(Height)
+        let ray = scene.camera.ray(s: s, t: t)
+        let col = color(ray: ray, world: scene.hitables, depth: 0)
+        
+        return PixelRGB32(r: col.x, g: col.y, b: col.z)
+    }
+    
+    let accumulatedImage =  accumulator.accumulate(image: image)
+    bitmap.generate { (x, y) -> PixelRGBU8 in
+        return toneMap(color: accumulatedImage.pixelAt(x: x, y: y))
+    }
+    
+    if !bitmap.writePng(url: url) {
+        print("Error saving image at \(imagePath).")
+        break
+    }
+    
+    let renderingDuration = Date().timeIntervalSince(startDate)
+    let progress = (Float(sample+1)/Float(Samples))*100.0
+    print("Sample \(sample+1)/\(Samples) (\(progress) %) in \(renderingDuration) s.")
 }
 
 
-let renderingDuration = Date().timeIntervalSince(startDate)
-print("Image rendered in \(renderingDuration) s.")
-
-
-let path = "~/Desktop/Image.png"
-let url = URL(fileURLWithPath: NSString(string: path).expandingTildeInPath)
-if bitmap.writePng(url: url) {
-    print("Image saved as \(path).")
-} else {
-    print("Error saving image at \(path).")
-}
 
 
