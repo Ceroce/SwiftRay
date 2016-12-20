@@ -15,18 +15,6 @@ let Height = 100    // Height of the generated image
 let Samples = 10   // Number of rays for each pixel
 let DepthMax = 50   // Maximum number of scattered rays
 
-func random01() -> Float {
-    return Float(arc4random())/Float(UInt32.max)
-}
-
-func randomMinus1Plus1() -> Float {
-    return 2.0 * random01() - 1.0
-}
-
-func randomPointInsideUnitSphere() -> Vec3 {
-    let radius = random01()
-    return radius * normalize(Vec3(randomMinus1Plus1(), randomMinus1Plus1(), randomMinus1Plus1()))
-}
 
 func toneMap(color: Vec3) -> Vec3 {
     let gamma: Float = 2.0
