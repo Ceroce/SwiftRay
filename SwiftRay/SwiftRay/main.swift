@@ -16,11 +16,7 @@ let Samples = 10   // Number of rays for each pixel
 let DepthMax = 50   // Maximum number of scattered rays
 
 
-func toneMap(color: Vec3) -> Vec3 {
-    let gamma: Float = 2.0
-    let invGamma = 1.0/gamma
-    return Vec3(powf(color.x, invGamma), powf(color.y, invGamma), powf(color.z, invGamma))
-}
+
 
 func backgroundColor(ray: Ray) -> Vec3 {
     let unitDir = normalize(ray.direction)
@@ -46,13 +42,14 @@ func color(ray: Ray, world: [Hitable], depth: Int) -> Vec3 {
     return attenuation * color(ray: secondaryRay, world: world, depth: depth+1)
 }
 
+let image = Image(width: Width, height: Height)
 let bitmap = Bitmap(width: Width, height: Height)
 
 
-let scene = BigAndSmallSpheresScene(aspectRatio: Float(Width)/Float(Height))
+let scene = SimpleScene(aspectRatio: Float(Width)/Float(Height))
 
 let startDate = Date()
-bitmap.generate { (x, y) -> PixelRGBU in
+image.generate { (x, y) -> PixelRGB32 in
     var colorSum = Vec3(0.0)
     for sample in 0..<Samples {
         let s = (Float(x)+random01()) / Float(Width)
@@ -64,9 +61,21 @@ bitmap.generate { (x, y) -> PixelRGBU in
     }
     
     let colorAvg = colorSum / Float(Samples)
-    let finalColor = toneMap(color: colorAvg)
-    return PixelRGBU(r: finalColor.x , g: finalColor.y , b: finalColor.z)
+    return PixelRGB32(r: colorAvg.x, g: colorAvg.y, b: colorAvg.z)
 }
+
+
+func toneMap(color: PixelRGB32) -> PixelRGBU8 {
+    let gamma: Float = 2.0
+    let invGamma = 1.0/gamma
+    return PixelRGBU8(r: powf(color.r, invGamma), g: powf(color.g, invGamma), b: powf(color.b, invGamma))
+}
+
+bitmap.generate { (x, y) -> PixelRGBU8 in
+    return toneMap(color: image.pixelAt(x: x, y: y))
+}
+
+
 let renderingDuration = Date().timeIntervalSince(startDate)
 print("Image rendered in \(renderingDuration) s.")
 

@@ -9,7 +9,7 @@
 import Foundation
 import CoreGraphics
 
-struct PixelRGBU {
+struct PixelRGBU8 {
     let r: UInt8
     let g: UInt8
     let b: UInt8
@@ -40,7 +40,7 @@ class Bitmap {
         self.width = width
         self.height = height
         
-        let bytesPerRow = width * MemoryLayout<PixelRGBU>.size
+        let bytesPerRow = width * MemoryLayout<PixelRGBU8>.size
         let size = height * bytesPerRow
         pixels = malloc(size)
         let colorSpace = CGColorSpace(name: CGColorSpace.sRGB)
@@ -53,13 +53,13 @@ class Bitmap {
     
     // The closure is given the x and y coordinates in the bitmap;
     // 0, 0 is in the top left corner.
-    func generate(closure: (Int, Int) -> PixelRGBU ) {
+    func generate(closure: (Int, Int) -> PixelRGBU8 ) {
         var pixelIndex = 0
         for y in 0..<height {
             for x in 0..<width {
-                let offset = pixelIndex * MemoryLayout<PixelRGBU>.size
+                let offset = pixelIndex * MemoryLayout<PixelRGBU8>.size
                 let pixel = closure(x, y)
-                pixels.storeBytes(of: pixel, toByteOffset: offset, as: PixelRGBU.self)
+                pixels.storeBytes(of: pixel, toByteOffset: offset, as: PixelRGBU8.self)
                 pixelIndex += 1
             }
         }
