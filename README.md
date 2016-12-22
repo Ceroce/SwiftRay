@@ -12,11 +12,11 @@ There are three books in the series, but SwiftRay is only based on the first one
 - Antialiasing (by multisampling every pixel)
 - Several materials: Lambertian (matte colour), Metal (reflective) and Dielectric (refractive)
 - Depth-of-field blur
+- Multi-threaded, to exploit multiple cores
 
 ##Limitations
 - There is only a single type of objects: Spheres!
-- The algorithm is interesting but very slow:  the sample image above took 112 minutes to render on my Mac. Path tracing is slow by principle, and the algorithm in the book presents no kind of refinement.
-- Multi-cores are not exploited (very doable since I use structs nearly everywhere)
+- The algorithm is interesting but very slow: Path tracing is slow by principle, and the algorithm in the book presents no kind of refinement.
 
 ## Supported plateforms
 I only tried running it on my Mac, though there is no reason why it could not work on a iOS device, except that it runs through the command line. Try it on your brand new iPad Pro !
