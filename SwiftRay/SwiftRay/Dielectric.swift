@@ -44,12 +44,12 @@ struct Dielectric: Material {
         if let refracted = refract(v: ray.direction, normal: outwardNormal, niOverNt: niOverNt) {
             let reflectProb = schlick(cosine: cosine, refrIndex: refractionIndex)
             if random01() < reflectProb {
-                return (Ray(origin: intersection.position, direction: reflected), attenuation)
+                return (Ray(origin: intersection.position, direction: reflected, time: ray.time), attenuation)
             } else {
-                return (Ray(origin: intersection.position, direction: refracted), attenuation)
+                return (Ray(origin: intersection.position, direction: refracted, time: ray.time), attenuation)
             }
         } else {
-            return (Ray(origin: intersection.position, direction: reflected), attenuation)
+            return (Ray(origin: intersection.position, direction: reflected, time: ray.time), attenuation)
         }
     }
     

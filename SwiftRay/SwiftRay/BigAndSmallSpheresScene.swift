@@ -13,7 +13,9 @@ struct BigAndSmallSpheresScene: Scene {
     let hitables: [Hitable]
     
     init(aspectRatio: Float) {
-        self.camera = Camera(lookFrom: Vec3(13, 2, 3), lookAt: Vec3(0, 0, 0), up: Vec3(0, 1, 0), yFov: 20, aspectRatio: aspectRatio, aperture: 0.1, focusDistance: 10.0)
+        let startTime: Float = 0.0
+        let endTime: Float = 1.0
+        self.camera = Camera(lookFrom: Vec3(13, 2, 3), lookAt: Vec3(0, 0, 0), up: Vec3(0, 1, 0), yFov: 20, aspectRatio: aspectRatio, aperture: 0.1, focusDistance: 10.0, startTime: startTime, endTime: endTime)
         
         var spheres: [Hitable] = []
         
@@ -25,7 +27,8 @@ struct BigAndSmallSpheresScene: Scene {
         for z in -11...11 {
             for x in -11...11 {
                 let radius: Float = 0.2
-                let center = Vec3(Float(x) + 0.9*random01(), radius, Float(z) + 0.9*random01())
+                let startCenter = Vec3(Float(x) + 0.9*random01(), radius, Float(z) + 0.9*random01())
+                let endCenter = startCenter + Vec3(0.0, random01()*0.5, 0.0)
                 
                 let chooseMat = random01()
                 var material: Material
@@ -37,7 +40,7 @@ struct BigAndSmallSpheresScene: Scene {
                     material = Dielectric(refractionIndex: RefractionIndex.Glass.rawValue)
                 }
                 
-                spheres.append(Sphere(center: center, radius: radius, material: material))
+                spheres.append(Sphere(startCenter: startCenter, endCenter: endCenter, startTime: startTime, endTime: endTime, radius: radius, material: material))
             }
         }
         

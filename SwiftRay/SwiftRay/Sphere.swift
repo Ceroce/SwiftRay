@@ -9,13 +9,37 @@
 import Darwin // For maths
 
 struct Sphere: Hitable {
-    let center: Vec3
+    let startCenter: Vec3
+    let endCenter: Vec3
+    let startTime: Float
+    let endTime: Float
     let radius: Float
     let material: Material
+    
+    init(startCenter: Vec3, endCenter: Vec3, startTime: Float, endTime: Float, radius: Float, material: Material) {
+        self.startCenter = startCenter
+        self.endCenter = endCenter
+        self.startTime = startTime
+        self.endTime = endTime
+        self.radius = radius
+        self.material = material
+    }
+    
+    
+    // Commodity initializer when the sphere does not move
+    init(center: Vec3, radius: Float, material: Material) {
+        self.startCenter = center
+        self.endCenter = center
+        self.startTime = 0.0
+        self.endTime = 1.0
+        self.radius = radius
+        self.material = material
+    }
     
     /* Determining where a ray hits a sphere is solving a second order equation:
      t^2.dot(B,B) + 2t.dot(B, A-C) + dot(A-C, A-C) - R^2 = 0 */
     func hit(ray: Ray, distMin: Float, distMax: Float) -> HitIntersection? {
+        let center = centerAt(time: ray.time)
         let oc: Vec3 = ray.origin - center
         let a = dot(ray.direction, ray.direction)
         let b = dot(ray.direction, oc)
@@ -41,5 +65,9 @@ struct Sphere: Hitable {
                 return nil
             }
         }
+    }
+    
+    private func centerAt(time: Float) -> Vec3 {
+        return startCenter + ((time-startTime)/(endTime-startTime))*(endCenter-startCenter)
     }
 }

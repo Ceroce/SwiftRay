@@ -12,6 +12,7 @@ There are three books in the series, but SwiftRay is only based on the first one
 - Antialiasing (by multisampling every pixel)
 - Several materials: Lambertian (matte colour), Metal (reflective) and Dielectric (refractive)
 - Depth-of-field blur
+- Motion blur
 - Multi-threaded, to exploit multiple cores
 
 ##Limitations

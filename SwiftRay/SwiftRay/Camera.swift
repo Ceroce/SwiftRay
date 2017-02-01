@@ -18,9 +18,11 @@ struct Camera {
     let v: Vec3
     
     let aperture: Float
+    let startTime: Float
+    let endTime: Float
     
     // yFov in degres. aspectRatio = width/height
-    init(lookFrom: Vec3, lookAt: Vec3, up: Vec3, yFov: Float, aspectRatio: Float, aperture: Float, focusDistance: Float) {
+    init(lookFrom: Vec3, lookAt: Vec3, up: Vec3, yFov: Float, aspectRatio: Float, aperture: Float, focusDistance: Float, startTime: Float, endTime: Float) {
         self.lookFrom = lookFrom
         self.aperture = aperture
         
@@ -34,13 +36,17 @@ struct Camera {
         lowerLeft = lookFrom - halfWidth*focusDistance*u - halfHeight*focusDistance*v - focusDistance*w
         horizontal = 2 * halfWidth * focusDistance * u
         vertical = 2 * halfHeight * focusDistance * v
+        
+        self.startTime = startTime
+        self.endTime = endTime
     }
     
     func ray(s: Float, t: Float) -> Ray {
         // Depth of field is simulated by offsetting the origin of the ray randomly
         let defocus = (aperture/2.0) * randPointOnUnitDisc()
         let offset: Vec3 = u * defocus.x + v * defocus.y
-        return Ray(origin: lookFrom+offset, direction: lowerLeft + s*horizontal + t*vertical - lookFrom - offset)
+        let time = self.startTime + random01()*(endTime-startTime)
+        return Ray(origin: lookFrom+offset, direction: lowerLeft + s*horizontal + t*vertical - lookFrom - offset, time: time)
     }
     
     // Uses a rejection method

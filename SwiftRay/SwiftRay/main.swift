@@ -8,9 +8,9 @@
 
 import Foundation
 
-let Width = 200     // Width of the generated image
-let Height = 100    // Height of the generated image
-let Samples = 10   // Number of rays for each pixel
+let Width = 600     // Width of the generated image
+let Height = 400    // Height of the generated image
+let Samples = 100   // Number of rays for each pixel
 let DepthMax = 50   // Maximum number of scattered rays
 
 
@@ -34,7 +34,7 @@ func color(ray: Ray, world: [Hitable], depth: Int) -> Vec3 {
     guard let (secondaryRay, attenuation) = intersection.material.scatteredRay(ray: ray, intersection: intersection) else {
         return backgroundColor(ray: ray)
     }
-
+    
     return attenuation * color(ray: secondaryRay, world: world, depth: depth+1)
 }
 
@@ -46,7 +46,7 @@ func toneMap(color: PixelRGB32) -> PixelRGBU8 {
 
 // *** Main ***
 
-let scene = SimpleScene(aspectRatio: Float(Width)/Float(Height))
+let scene = BigAndSmallSpheresScene(aspectRatio: Float(Width)/Float(Height))
 
 print("SwiftRay")
 let imagePath = "~/Desktop/Image.png"
@@ -56,7 +56,6 @@ let startDate = Date()
 
 let bitmap = Bitmap(width: Width, height: Height)
 let accumulator = ImageAccumulator()
-let imageSavingQueue = DispatchQueue(label: "SwiftRay image file saving") // Serial queue
 
 func save(image: Image) {
     let accumulatedImage =  accumulator.accumulate(image: image)
@@ -74,14 +73,18 @@ func printProgress(sampleIndex: Int, sampleCount:Int) {
 }
 
 
+let raytracingQueue = OperationQueue()
+raytracingQueue.name = "com.ceroce.SwiftRay Raytracing"
+raytracingQueue.maxConcurrentOperationCount = 4 // Parallel queue
 
-let raytracingQueue = DispatchQueue.global() // Parallel queue
-let dispatchGroup = DispatchGroup()
+let imageSavingQueue = OperationQueue()
+imageSavingQueue.name = "com.ceroce.SwiftRay Image Saving"
+imageSavingQueue.maxConcurrentOperationCount = 1    // Serial queue
+
 
 var samplesRendered = 0;
 for sample in 0..<Samples {
-    raytracingQueue.async {
-        dispatchGroup.enter()
+    raytracingQueue.addOperation {
         let image = Image(width: Width, height: Height)
         image.generate { (x, y) -> PixelRGB32 in
             let s = (Float(x)+random01()) / Float(Width)
@@ -92,17 +95,18 @@ for sample in 0..<Samples {
             return PixelRGB32(r: col.x, g: col.y, b: col.z)
         }
         
-        imageSavingQueue.async {
+        imageSavingQueue.addOperation {
             save(image: image)
             printProgress(sampleIndex: samplesRendered, sampleCount: Samples)
             samplesRendered += 1
-            dispatchGroup.leave()
         }
     }
 }
 
+while samplesRendered == 0 || (raytracingQueue.operationCount > 0) || (imageSavingQueue.operationCount > 0) {
+    // Wait
+}
 
-dispatchGroup.wait()
 let renderingDuration = Date().timeIntervalSince(startDate)
 print("Image rendered in \(renderingDuration) s.")
 
