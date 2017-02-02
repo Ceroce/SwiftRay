@@ -24,6 +24,20 @@ struct Vec3 {
         self.y = f
         self.z = f
     }
+    
+    subscript(index: Int) -> Float {
+        switch index {
+        case 0:
+            return self.x
+        case 1:
+            return self.y
+        case 2:
+            return self.z
+        default:
+            assertionFailure("Index \(index) is out of range.")
+            return Float()
+        }
+    }
 }
 
 extension Vec3 {
@@ -76,6 +90,18 @@ func cross(_ u: Vec3, _ v: Vec3) -> Vec3 {
     return Vec3(u.y * v.z - v.y * u.z,
                 u.z * v.x - v.z * u.x,
                 u.x * v.y - v.x * u.y)
+}
+
+func min(_ u: Vec3, _ v: Vec3) -> Vec3 {
+    return Vec3(min(u.x, v.x),
+                min(u.y, v.y),
+                min(u.z, v.z))
+}
+
+func max(_ u: Vec3, _ v: Vec3) -> Vec3 {
+    return Vec3(max(u.x, v.x),
+                max(u.y, v.y),
+                max(u.z, v.z))
 }
 
 func mix(_ u: Vec3, _ v: Vec3, _ alpha: Float) -> Vec3 {

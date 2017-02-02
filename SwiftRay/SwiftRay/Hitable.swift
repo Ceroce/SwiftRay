@@ -15,6 +15,7 @@ struct HitIntersection {
 
 protocol Hitable {
     func hit(ray: Ray, distMin: Float, distMax: Float) -> HitIntersection?
+    func boundingBox(startTime: Float, endTime: Float) -> BoundingBox?
 }
 
 func closestHit(ray: Ray, hitables: [Hitable]) -> HitIntersection? {
@@ -31,3 +32,11 @@ func closestHit(ray: Ray, hitables: [Hitable]) -> HitIntersection? {
     
     return closerIntersection
 }
+
+/*func closestHit(ray: Ray, hitables: [Hitable]) -> HitIntersection? {
+    for hitable in hitables { // There is only one
+        return hitable.hit(ray: ray, distMin: 0.001, distMax: Float.infinity)
+    }
+    
+    return nil
+}*/

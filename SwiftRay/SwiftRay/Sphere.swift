@@ -67,6 +67,13 @@ struct Sphere: Hitable {
         }
     }
     
+    func boundingBox(startTime: Float, endTime: Float) -> BoundingBox? {
+        let Size = Vec3(radius)
+        let firstCenter = centerAt(time: startTime)
+        let secondCenter = centerAt(time: endTime)
+        return BoundingBox(minPoint: min(firstCenter-Size, secondCenter-Size), maxPoint: max(firstCenter+Size, secondCenter+Size))
+    }
+    
     private func centerAt(time: Float) -> Vec3 {
         return startCenter + ((time-startTime)/(endTime-startTime))*(endCenter-startCenter)
     }

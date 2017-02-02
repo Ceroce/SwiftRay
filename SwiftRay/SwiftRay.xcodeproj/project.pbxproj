@@ -25,6 +25,9 @@
 		DF36E57C1DE6DF48008BF0DE /* Dielectric.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF36E57B1DE6DF48008BF0DE /* Dielectric.swift */; };
 		DF36E57E1DE6F7B2008BF0DE /* Trigonometry.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF36E57D1DE6F7B2008BF0DE /* Trigonometry.swift */; };
 		DF36E5801DE735C2008BF0DE /* Scene.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF36E57F1DE735C2008BF0DE /* Scene.swift */; };
+		DF4C10E11E43380B00851BB0 /* SphereArrayScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF4C10E01E43380B00851BB0 /* SphereArrayScene.swift */; };
+		DF979C791E42145100FCC427 /* BoundingBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF979C781E42145100FCC427 /* BoundingBox.swift */; };
+		DF979C7B1E42252D00FCC427 /* BoundingNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF979C7A1E42252D00FCC427 /* BoundingNode.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -59,6 +62,9 @@
 		DF36E57B1DE6DF48008BF0DE /* Dielectric.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dielectric.swift; sourceTree = "<group>"; };
 		DF36E57D1DE6F7B2008BF0DE /* Trigonometry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Trigonometry.swift; sourceTree = "<group>"; };
 		DF36E57F1DE735C2008BF0DE /* Scene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Scene.swift; sourceTree = "<group>"; };
+		DF4C10E01E43380B00851BB0 /* SphereArrayScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SphereArrayScene.swift; sourceTree = "<group>"; };
+		DF979C781E42145100FCC427 /* BoundingBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoundingBox.swift; sourceTree = "<group>"; };
+		DF979C7A1E42252D00FCC427 /* BoundingNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoundingNode.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +84,7 @@
 				DF36E57F1DE735C2008BF0DE /* Scene.swift */,
 				DF1874B71E0841E2001D9CE8 /* SimpleScene.swift */,
 				DF1874B41E08411F001D9CE8 /* BigAndSmallSpheresScene.swift */,
+				DF4C10E01E43380B00851BB0 /* SphereArrayScene.swift */,
 			);
 			name = Scenes;
 			sourceTree = "<group>";
@@ -107,6 +114,8 @@
 				DF36E5701DE5ADDE008BF0DE /* Sphere.swift */,
 				DF36E5721DE5CF12008BF0DE /* Camera.swift */,
 				DF36E56E1DE5AC6B008BF0DE /* Hitable.swift */,
+				DF979C781E42145100FCC427 /* BoundingBox.swift */,
+				DF979C7A1E42252D00FCC427 /* BoundingNode.swift */,
 				DF36E57A1DE5FE29008BF0DE /* Materials */,
 				DF36E56A1DE5931D008BF0DE /* Vector.swift */,
 				DF36E57D1DE6F7B2008BF0DE /* Trigonometry.swift */,
@@ -191,7 +200,9 @@
 				DF36E57C1DE6DF48008BF0DE /* Dielectric.swift in Sources */,
 				DF36E5751DE5E1B3008BF0DE /* Material.swift in Sources */,
 				DF36E56D1DE5A1D3008BF0DE /* Ray.swift in Sources */,
+				DF979C7B1E42252D00FCC427 /* BoundingNode.swift in Sources */,
 				DF36E5621DE49DF0008BF0DE /* main.swift in Sources */,
+				DF979C791E42145100FCC427 /* BoundingBox.swift in Sources */,
 				DF36E5801DE735C2008BF0DE /* Scene.swift in Sources */,
 				DF36E5711DE5ADDE008BF0DE /* Sphere.swift in Sources */,
 				DF36E56B1DE5931D008BF0DE /* Vector.swift in Sources */,
@@ -204,6 +215,7 @@
 				DF1874B81E0841E2001D9CE8 /* SimpleScene.swift in Sources */,
 				DF1874BE1E092BA3001D9CE8 /* ImageAccumulator.swift in Sources */,
 				DF36E5791DE5FE1D008BF0DE /* Metal.swift in Sources */,
+				DF4C10E11E43380B00851BB0 /* SphereArrayScene.swift in Sources */,
 				DF36E56F1DE5AC6B008BF0DE /* Hitable.swift in Sources */,
 				DF36E5771DE5E346008BF0DE /* Lambertian.swift in Sources */,
 			);

@@ -28,7 +28,7 @@ struct BigAndSmallSpheresScene: Scene {
             for x in -11...11 {
                 let radius: Float = 0.2
                 let startCenter = Vec3(Float(x) + 0.9*random01(), radius, Float(z) + 0.9*random01())
-                let endCenter = startCenter + Vec3(0.0, random01()*0.5, 0.0)
+                let endCenter = startCenter// + Vec3(0.0, random01()*0.5, 0.0)
                 
                 let chooseMat = random01()
                 var material: Material
@@ -49,6 +49,8 @@ struct BigAndSmallSpheresScene: Scene {
         spheres.append(Sphere(center: Vec3(-4, 1, 0), radius: 1.0, material: Lambertian(albedo: Vec3(0.4, 0.2, 0.1))))
         spheres.append(Sphere(center: Vec3(4, 1, 0), radius: 1.0, material: Metal(albedo: Vec3(0.7, 0.6, 0.5), fuzz: 0.0)))
         
-        hitables = spheres
+//        hitables = spheres
+        let boundingVolumeHierarchy = BoundingNode(hitables: spheres, startTime: startTime, endTime: endTime)
+        hitables = [boundingVolumeHierarchy]
     }
 }
