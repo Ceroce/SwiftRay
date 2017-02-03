@@ -68,6 +68,12 @@ extension Vec3 {
     static func / (v: Vec3, f: Float) -> Vec3 {
         return Vec3(v.x / f, v.y / f, v.z / f)
     }
+    
+    static func != (u: Vec3, v: Vec3) -> Bool {
+        return u.x != v.x
+            || u.y != v.y
+            || u.z != v.z
+    }
 }
 
 func squaredLength(_ v: Vec3) -> Float {

@@ -13,12 +13,12 @@ struct SphereArrayScene {
     init(aspectRatio: Float) {
         let startTime: Float = 0.0
         let endTime: Float = 1.0
-        self.camera = Camera(lookFrom: Vec3(15, 5, 12), lookAt: Vec3(0, 0, 0), up: Vec3(0, 1, 0), yFov: 20, aspectRatio: aspectRatio, aperture: 0.1, focusDistance: 10.0, startTime: startTime, endTime: endTime)
+        self.camera = Camera(lookFrom: Vec3(15, 5, 12), lookAt: Vec3(0, 0, 0), up: Vec3(0, 1, 0), yFov: 20, aspectRatio: aspectRatio, aperture: 0.1, focusDistance: length(Vec3(15, 5, 12)), startTime: startTime, endTime: endTime)
         
         var spheres: [Hitable] = []
         
-        let mini = -1
-        let maxi = 1
+        let mini = -2
+        let maxi = 2
         
         for z in mini...maxi {
             for y in mini...maxi {
