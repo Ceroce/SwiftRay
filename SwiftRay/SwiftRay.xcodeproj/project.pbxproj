@@ -28,6 +28,9 @@
 		DF4C10E11E43380B00851BB0 /* SphereArrayScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF4C10E01E43380B00851BB0 /* SphereArrayScene.swift */; };
 		DF979C791E42145100FCC427 /* BoundingBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF979C781E42145100FCC427 /* BoundingBox.swift */; };
 		DF979C7B1E42252D00FCC427 /* BoundingNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF979C7A1E42252D00FCC427 /* BoundingNode.swift */; };
+		DFF3770B1E44763500D85A1C /* XYRectangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFF3770A1E44763500D85A1C /* XYRectangle.swift */; };
+		DFF3770D1E44803200D85A1C /* XZRectangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFF3770C1E44803200D85A1C /* XZRectangle.swift */; };
+		DFF3770F1E44C97B00D85A1C /* YZRectangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFF3770E1E44C97B00D85A1C /* YZRectangle.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -65,6 +68,9 @@
 		DF4C10E01E43380B00851BB0 /* SphereArrayScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SphereArrayScene.swift; sourceTree = "<group>"; };
 		DF979C781E42145100FCC427 /* BoundingBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoundingBox.swift; sourceTree = "<group>"; };
 		DF979C7A1E42252D00FCC427 /* BoundingNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoundingNode.swift; sourceTree = "<group>"; };
+		DFF3770A1E44763500D85A1C /* XYRectangle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XYRectangle.swift; sourceTree = "<group>"; };
+		DFF3770C1E44803200D85A1C /* XZRectangle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XZRectangle.swift; sourceTree = "<group>"; };
+		DFF3770E1E44C97B00D85A1C /* YZRectangle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YZRectangle.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,6 +122,9 @@
 				DF36E56E1DE5AC6B008BF0DE /* Hitable.swift */,
 				DF979C781E42145100FCC427 /* BoundingBox.swift */,
 				DF979C7A1E42252D00FCC427 /* BoundingNode.swift */,
+				DFF3770A1E44763500D85A1C /* XYRectangle.swift */,
+				DFF3770C1E44803200D85A1C /* XZRectangle.swift */,
+				DFF3770E1E44C97B00D85A1C /* YZRectangle.swift */,
 				DF36E57A1DE5FE29008BF0DE /* Materials */,
 				DF36E56A1DE5931D008BF0DE /* Vector.swift */,
 				DF36E57D1DE6F7B2008BF0DE /* Trigonometry.swift */,
@@ -197,9 +206,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DFF3770D1E44803200D85A1C /* XZRectangle.swift in Sources */,
 				DF36E57C1DE6DF48008BF0DE /* Dielectric.swift in Sources */,
 				DF36E5751DE5E1B3008BF0DE /* Material.swift in Sources */,
 				DF36E56D1DE5A1D3008BF0DE /* Ray.swift in Sources */,
+				DFF3770F1E44C97B00D85A1C /* YZRectangle.swift in Sources */,
+				DFF3770B1E44763500D85A1C /* XYRectangle.swift in Sources */,
 				DF979C7B1E42252D00FCC427 /* BoundingNode.swift in Sources */,
 				DF36E5621DE49DF0008BF0DE /* main.swift in Sources */,
 				DF979C791E42145100FCC427 /* BoundingBox.swift in Sources */,
