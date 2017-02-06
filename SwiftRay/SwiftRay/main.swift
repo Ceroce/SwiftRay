@@ -8,9 +8,9 @@
 
 import Foundation
 
-let Width = 400     // Width of the generated image
-let Height = 266    // Height of the generated image
-let Samples = 500   // Number of rays for each pixel
+let Width = 200     // Width of the generated image
+let Height = 200    // Height of the generated image
+let Samples = 100   // Number of rays for each pixel
 let DepthMax = 50   // Maximum number of scattered rays
 
 
@@ -46,7 +46,7 @@ func toneMap(color: PixelRGB32) -> PixelRGBU8 {
 
 // *** Main ***
 
-let scene = BigAndSmallSpheresScene(aspectRatio: Float(Width)/Float(Height))
+let scene = SimpleScene(aspectRatio: Float(Width)/Float(Height))
 
 print("SwiftRay")
 let imagePath = "~/Desktop/Image.png"

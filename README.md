@@ -14,10 +14,11 @@ There are three books in the series, but SwiftRay is only based on the first one
 - Depth-of-field blur
 - Motion blur
 - Multi-threaded, to exploit multiple cores
+- A Bounding Volume Hierarchy algorithm speeds-up calculations
 
 ##Limitations
 - There is only a single type of objects: Spheres!
-- The algorithm is interesting but very slow: Path tracing is slow by principle, and the algorithm in the book presents no kind of refinement.
+- The algorithm is interesting but very slow: Path tracing is slow by principle.
 
 ## Supported plateforms
 I only tried running it on my Mac, though there is no reason why it could not work on a iOS device, except that it runs through the command line. Try it on your brand new iPad Pro !
