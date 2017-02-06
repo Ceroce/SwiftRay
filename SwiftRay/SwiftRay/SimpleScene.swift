@@ -22,6 +22,7 @@ struct SimpleScene: Scene {
             Sphere(center: Vec3(1, 0, -1), radius: 0.5, material: Metal(albedo: Vec3(0.8, 0.6, 0.2), fuzz: 0.2))
         ]
         
-        hitables =  [BoundingNode(hitables: spheres, startTime: 0.0, endTime: 1.0)]
+        let bvh = BoundingVolumeHierarchy(hitables: spheres, startTime: 0.0, endTime: 1.0)
+        hitables =  [bvh]
     }
 }

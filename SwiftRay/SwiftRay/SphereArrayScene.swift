@@ -29,8 +29,8 @@ struct SphereArrayScene {
             }
         }
         
-        let boundingNode = BoundingNode(hitables: mutHitables, startTime: startTime, endTime: endTime)
-        let bounds = boundingNode.boundingBox
+        let bvh = BoundingVolumeHierarchy(hitables: mutHitables, startTime: startTime, endTime: endTime)
+        let bounds = bvh.boundingBox(startTime: startTime, endTime: endTime)
         
         let redRect = XZRectangle(x0: bounds.minPoint.x, x1: bounds.maxPoint.x, z0: bounds.minPoint.z, z1: bounds.maxPoint.z, k: bounds.minPoint.y, material: Lambertian(albedo: Vec3(1, 0, 0)))
         
@@ -38,25 +38,7 @@ struct SphereArrayScene {
         
         mutHitables.append(redRect)
         mutHitables.append(blueRect)
-        let node2 = BoundingNode(hitables: mutHitables, startTime: startTime, endTime: endTime)
-        hitables = [node2]
- 
-        
-
- /*       var objects: [Hitable] = []
-        objects.append(contentsOf: spheres)
-        
-        let boundingNode = BoundingNode(hitables: spheres, startTime: startTime, endTime: endTime)
-        let bounds = boundingNode.boundingBox
-        objects.append(boundingNode)
-        
-        let redRect = XZRectangle(x0: bounds.minPoint.x, x1: bounds.maxPoint.x, z0: bounds.minPoint.z, z1: bounds.maxPoint.z, k: bounds.minPoint.y, material: Lambertian(albedo: Vec3(1, 0, 0)))
-        objects.append(redRect)
-        
-        let blueRect = XYRectangle(x0: bounds.minPoint.x, x1: bounds.maxPoint.x, y0: bounds.minPoint.y, y1: bounds.maxPoint.y, k: bounds.minPoint.z, material: Lambertian(albedo: Vec3(0, 0, 1)))
-        objects.append(blueRect)
-        
-        hitables = objects
-*/
+        let bvh2 = BoundingVolumeHierarchy(hitables: mutHitables, startTime: startTime, endTime: endTime)
+        hitables = [bvh2]
     }
 }
