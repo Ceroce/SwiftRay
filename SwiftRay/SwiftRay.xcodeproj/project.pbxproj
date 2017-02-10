@@ -28,6 +28,7 @@
 		DF4C10E11E43380B00851BB0 /* SphereArrayScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF4C10E01E43380B00851BB0 /* SphereArrayScene.swift */; };
 		DF979C791E42145100FCC427 /* BoundingBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF979C781E42145100FCC427 /* BoundingBox.swift */; };
 		DF979C7B1E42252D00FCC427 /* BoundingVolumeHierarchy.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF979C7A1E42252D00FCC427 /* BoundingVolumeHierarchy.swift */; };
+		DFC46CFC1E4E0A1B00D28282 /* CheckerTexture.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFC46CFB1E4E0A1B00D28282 /* CheckerTexture.swift */; };
 		DFF3770B1E44763500D85A1C /* XYRectangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFF3770A1E44763500D85A1C /* XYRectangle.swift */; };
 		DFF3770D1E44803200D85A1C /* XZRectangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFF3770C1E44803200D85A1C /* XZRectangle.swift */; };
 		DFF3770F1E44C97B00D85A1C /* YZRectangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFF3770E1E44C97B00D85A1C /* YZRectangle.swift */; };
@@ -70,6 +71,7 @@
 		DF4C10E01E43380B00851BB0 /* SphereArrayScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SphereArrayScene.swift; sourceTree = "<group>"; };
 		DF979C781E42145100FCC427 /* BoundingBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoundingBox.swift; sourceTree = "<group>"; };
 		DF979C7A1E42252D00FCC427 /* BoundingVolumeHierarchy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoundingVolumeHierarchy.swift; sourceTree = "<group>"; };
+		DFC46CFB1E4E0A1B00D28282 /* CheckerTexture.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckerTexture.swift; sourceTree = "<group>"; };
 		DFF3770A1E44763500D85A1C /* XYRectangle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XYRectangle.swift; sourceTree = "<group>"; };
 		DFF3770C1E44803200D85A1C /* XZRectangle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XZRectangle.swift; sourceTree = "<group>"; };
 		DFF3770E1E44C97B00D85A1C /* YZRectangle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YZRectangle.swift; sourceTree = "<group>"; };
@@ -149,6 +151,7 @@
 				DF36E57B1DE6DF48008BF0DE /* Dielectric.swift */,
 				DFF3776F1E4E05BF00D85A1C /* Texture.swift */,
 				DFF377711E4E067500D85A1C /* ConstantTexture.swift */,
+				DFC46CFB1E4E0A1B00D28282 /* CheckerTexture.swift */,
 			);
 			name = Materials;
 			sourceTree = "<group>";
@@ -228,6 +231,7 @@
 				DF36E5691DE49E7D008BF0DE /* Bitmap.swift in Sources */,
 				DF1874BA1E091773001D9CE8 /* Random.swift in Sources */,
 				DFF377721E4E067500D85A1C /* ConstantTexture.swift in Sources */,
+				DFC46CFC1E4E0A1B00D28282 /* CheckerTexture.swift in Sources */,
 				DF1874B51E08411F001D9CE8 /* BigAndSmallSpheresScene.swift in Sources */,
 				DF36E5731DE5CF12008BF0DE /* Camera.swift in Sources */,
 				DF1874BC1E091995001D9CE8 /* Image.swift in Sources */,

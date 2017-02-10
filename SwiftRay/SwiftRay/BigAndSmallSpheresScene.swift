@@ -20,7 +20,10 @@ struct BigAndSmallSpheresScene: Scene {
         var spheres: [Hitable] = []
         
         // Ground
-        let ground = Sphere(center: Vec3(0, -1000, 0), radius: 1000, material: Lambertian(albedo: ConstantTexture(color: Vec3(0.5))))
+        let checker = CheckerTexture(tileSize: 5,
+                                     oddTexture: ConstantTexture(color: Vec3(0.9)),
+                                     evenTexture: ConstantTexture(color: Vec3(0.2, 0.3, 0.1)))
+        let ground = Sphere(center: Vec3(0, -1000, 0), radius: 1000, material: Lambertian(albedo: checker))
         spheres.append(ground)
         
         // A number of small spheres
@@ -28,7 +31,7 @@ struct BigAndSmallSpheresScene: Scene {
             for x in -11...11 {
                 let radius: Float = 0.2
                 let startCenter = Vec3(Float(x) + 0.9*random01(), radius, Float(z) + 0.9*random01())
-                let endCenter = startCenter// + Vec3(0.0, random01()*0.5, 0.0)
+                let endCenter = startCenter // + Vec3(0.0, random01()*0.5, 0.0)
                 
                 let chooseMat = random01()
                 var material: Material
