@@ -31,6 +31,8 @@
 		DFF3770B1E44763500D85A1C /* XYRectangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFF3770A1E44763500D85A1C /* XYRectangle.swift */; };
 		DFF3770D1E44803200D85A1C /* XZRectangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFF3770C1E44803200D85A1C /* XZRectangle.swift */; };
 		DFF3770F1E44C97B00D85A1C /* YZRectangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFF3770E1E44C97B00D85A1C /* YZRectangle.swift */; };
+		DFF377701E4E05BF00D85A1C /* Texture.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFF3776F1E4E05BF00D85A1C /* Texture.swift */; };
+		DFF377721E4E067500D85A1C /* ConstantTexture.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFF377711E4E067500D85A1C /* ConstantTexture.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -71,6 +73,8 @@
 		DFF3770A1E44763500D85A1C /* XYRectangle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XYRectangle.swift; sourceTree = "<group>"; };
 		DFF3770C1E44803200D85A1C /* XZRectangle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XZRectangle.swift; sourceTree = "<group>"; };
 		DFF3770E1E44C97B00D85A1C /* YZRectangle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YZRectangle.swift; sourceTree = "<group>"; };
+		DFF3776F1E4E05BF00D85A1C /* Texture.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Texture.swift; sourceTree = "<group>"; };
+		DFF377711E4E067500D85A1C /* ConstantTexture.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConstantTexture.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -143,6 +147,8 @@
 				DF36E5761DE5E346008BF0DE /* Lambertian.swift */,
 				DF36E5781DE5FE1D008BF0DE /* Metal.swift */,
 				DF36E57B1DE6DF48008BF0DE /* Dielectric.swift */,
+				DFF3776F1E4E05BF00D85A1C /* Texture.swift */,
+				DFF377711E4E067500D85A1C /* ConstantTexture.swift */,
 			);
 			name = Materials;
 			sourceTree = "<group>";
@@ -217,9 +223,11 @@
 				DF979C791E42145100FCC427 /* BoundingBox.swift in Sources */,
 				DF36E5801DE735C2008BF0DE /* Scene.swift in Sources */,
 				DF36E5711DE5ADDE008BF0DE /* Sphere.swift in Sources */,
+				DFF377701E4E05BF00D85A1C /* Texture.swift in Sources */,
 				DF36E56B1DE5931D008BF0DE /* Vector.swift in Sources */,
 				DF36E5691DE49E7D008BF0DE /* Bitmap.swift in Sources */,
 				DF1874BA1E091773001D9CE8 /* Random.swift in Sources */,
+				DFF377721E4E067500D85A1C /* ConstantTexture.swift in Sources */,
 				DF1874B51E08411F001D9CE8 /* BigAndSmallSpheresScene.swift in Sources */,
 				DF36E5731DE5CF12008BF0DE /* Camera.swift in Sources */,
 				DF1874BC1E091995001D9CE8 /* Image.swift in Sources */,

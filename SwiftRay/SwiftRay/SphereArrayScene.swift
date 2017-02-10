@@ -24,7 +24,7 @@ struct SphereArrayScene {
             for y in mini...maxi {
                 for x in mini...maxi {
                     let center = Vec3(Float(x), Float(y), Float(z))
-                    mutHitables.append(Sphere(center: center, radius: 0.2, material: Lambertian(albedo: Vec3(random01(), random01(), random01()) )))
+                    mutHitables.append(Sphere(center: center, radius: 0.2, material: Lambertian(albedo: ConstantTexture(color: Vec3(random01(), random01(), random01())) )))
                 }
             }
         }
@@ -32,9 +32,9 @@ struct SphereArrayScene {
         let bvh = BoundingVolumeHierarchy(hitables: mutHitables, startTime: startTime, endTime: endTime)
         let bounds = bvh.boundingBox(startTime: startTime, endTime: endTime)
         
-        let redRect = XZRectangle(x0: bounds.minPoint.x, x1: bounds.maxPoint.x, z0: bounds.minPoint.z, z1: bounds.maxPoint.z, k: bounds.minPoint.y, material: Lambertian(albedo: Vec3(1, 0, 0)))
+        let redRect = XZRectangle(x0: bounds.minPoint.x, x1: bounds.maxPoint.x, z0: bounds.minPoint.z, z1: bounds.maxPoint.z, k: bounds.minPoint.y, material: Lambertian(albedo: ConstantTexture(color: Vec3(1, 0, 0))))
         
-        let blueRect = XYRectangle(x0: bounds.minPoint.x, x1: bounds.maxPoint.x, y0: bounds.minPoint.y, y1: bounds.maxPoint.y, k: bounds.minPoint.z, material: Lambertian(albedo: Vec3(0, 0, 1)))
+        let blueRect = XYRectangle(x0: bounds.minPoint.x, x1: bounds.maxPoint.x, y0: bounds.minPoint.y, y1: bounds.maxPoint.y, k: bounds.minPoint.z, material: Lambertian(albedo: ConstantTexture(color: Vec3(0, 0, 1))))
         
         mutHitables.append(redRect)
         mutHitables.append(blueRect)
