@@ -9,16 +9,16 @@
 import Darwin   // For maths
 
 enum RefractionIndex: Float {
-    case Void = 1.0
-    case Air = 1.000_272
-    case Water = 1.333
-    case Cornea = 1.38
-    case CrownGlass = 1.52
-    case Cristal = 1.524
-    case Amber = 1.55
-    case Glass = 1.57
-    case FlintGlass = 1.62
-    case Diamond = 2.42
+    case void = 1.0
+    case air = 1.000_272
+    case water = 1.333
+    case cornea = 1.38
+    case crownGlass = 1.52
+    case cristal = 1.524
+    case amber = 1.55
+    case glass = 1.57
+    case flintGlass = 1.62
+    case diamond = 2.42
 }
 
 struct Dielectric: Material {
@@ -36,7 +36,7 @@ struct Dielectric: Material {
             cosine = refractionIndex * dot(ray.direction, intersection.normal) / length(ray.direction)
         } else {
             outwardNormal = intersection.normal
-            niOverNt = RefractionIndex.Air.rawValue/refractionIndex
+            niOverNt = RefractionIndex.air.rawValue/refractionIndex
             cosine = -dot(ray.direction, intersection.normal) / length(ray.direction)
         }
     

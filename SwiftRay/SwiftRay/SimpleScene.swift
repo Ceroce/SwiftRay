@@ -17,7 +17,7 @@ struct SimpleScene: Scene {
         
         let spheres = [
             Sphere(center: Vec3(0, -100.5, -1), radius: 100, material: Lambertian(albedo: ConstantTexture(color: Vec3(0.8, 0.8, 0.0)))), // Ground
-            Sphere(center: Vec3(-1, 0, -1), radius: 0.5, material: Dielectric(refractionIndex: RefractionIndex.Cristal.rawValue)),
+            Sphere(center: Vec3(-1, 0, -1), radius: 0.5, material: Dielectric(refractionIndex: RefractionIndex.cristal.rawValue)),
             Sphere(center: Vec3(0, 0, -1), radius: 0.5, material: Lambertian(albedo: ConstantTexture(color: Vec3(0.1, 0.2, 0.5)))),
             Sphere(center: Vec3(1, 0, -1), radius: 0.5, material: Metal(albedo: ConstantTexture(color: Vec3(0.8, 0.6, 0.2)), fuzz: 0.2))
         ]

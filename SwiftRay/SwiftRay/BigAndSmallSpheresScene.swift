@@ -40,7 +40,7 @@ struct BigAndSmallSpheresScene: Scene {
                 } else if chooseMat < 0.95 {
                     material = Metal(albedo: ConstantTexture(color: 0.5*Vec3(1.0+random01(), 1.0+random01(), 1.0+random01())), fuzz: 0.5*random01())
                 } else {
-                    material = Dielectric(refractionIndex: RefractionIndex.Glass.rawValue)
+                    material = Dielectric(refractionIndex: RefractionIndex.glass.rawValue)
                 }
                 
                 spheres.append(Sphere(startCenter: startCenter, endCenter: endCenter, startTime: startTime, endTime: endTime, radius: radius, material: material))
@@ -48,7 +48,7 @@ struct BigAndSmallSpheresScene: Scene {
         }
         
         // 3 big spheres
-        spheres.append(Sphere(center: Vec3(0, 1, 0), radius: 1.0, material: Dielectric(refractionIndex: RefractionIndex.Cristal.rawValue)))
+        spheres.append(Sphere(center: Vec3(0, 1, 0), radius: 1.0, material: Dielectric(refractionIndex: RefractionIndex.cristal.rawValue)))
         spheres.append(Sphere(center: Vec3(-4, 1, 0), radius: 1.0, material: Lambertian(albedo: ConstantTexture(color: Vec3(0.4, 0.2, 0.1)))))
         spheres.append(Sphere(center: Vec3(4, 1, 0), radius: 1.0, material: Metal(albedo: ConstantTexture(color: Vec3(0.7, 0.6, 0.5)), fuzz: 0.0)))
         
