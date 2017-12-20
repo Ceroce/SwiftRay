@@ -1,4 +1,4 @@
-#SwiftRay
+# SwiftRay
 A simplistic Path tracer written in Swift.
 
 ![Sample image produced by SwiftRay](doc/Image.png)
@@ -8,7 +8,7 @@ I needed to create a project to gain experience in programming with Swift. The P
 
 There are three books in the series, but SwiftRay is only based on the first one. The [original source code](https://github.com/petershirley/raytracinginoneweekend) is written in C++. You should follow along with the book, since it's cheap, and provides nice explanations.
 
-##Features
+## Features
 - Antialiasing (by multisampling every pixel)
 - Several materials: Lambertian (matte colour), Metal (reflective) and Dielectric (refractive)
 - Depth-of-field blur
@@ -16,7 +16,7 @@ There are three books in the series, but SwiftRay is only based on the first one
 - Multi-threaded, to exploit multiple cores
 - A Bounding Volume Hierarchy algorithm speeds-up calculations
 
-##Limitations
+## Limitations
 - There is only a single type of objects: Spheres!
 - The algorithm is interesting but very slow: Path tracing is slow by principle.
 
@@ -25,7 +25,7 @@ I only tried running it on my Mac, though there is no reason why it could not wo
 
 It can not work on other OSes, since it relies on Core Graphics to save the image to a PNG file. (It also imports Darwin for mathematical functions, but that can be replaced with libc on Linux).
 
-##What programmers might find interesting
+## What programmers might find interesting
 Take a look at Bitmap.swift which does low-level memory access to the bitmap. 
 
 Vector.swift also contains overloaded operators. Thanks to Swift, the implementation is simple and elegant.
