@@ -9,9 +9,9 @@
 import Darwin // maths
 
 func rad(_ degrees: Float) -> Float {
-    return Float(M_PI / 180.0) * degrees
+    return Float(Double.pi / 180.0) * degrees
 }
 
 func deg(_ radians: Float) -> Float {
-    return Float(180.0/M_PI) * radians
+    return Float(180.0/Double.pi) * radians
 }

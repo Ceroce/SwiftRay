@@ -83,7 +83,7 @@ imageSavingQueue.maxConcurrentOperationCount = 1    // Serial queue
 
 
 var samplesRendered = 0;
-for sample in 0..<Samples {
+for _ in 0..<Samples {
     raytracingQueue.addOperation {
         let image = Image(width: Width, height: Height)
         image.generate { (x, y) -> PixelRGB32 in
