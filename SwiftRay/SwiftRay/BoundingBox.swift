@@ -24,7 +24,7 @@ struct BoundingBox {
     // We get two distances for each axis (tx0, tx1, ty0, ty1, tz0, tz1).
     // The ray hits the box only if all ranges [tx0..tx1], [ty0..ty1], [tz0..tz1] overlap.
     // The implementation has two markers: tmin for the lower t among the three axes, and tmax for the upper t.
-    // If both markers cross, then there is not overlapping.
+    // If both markers cross, then there is no overlapping.
     func isHitBy(ray: Ray, distMin: Float, distMax: Float) -> Bool {
         var tmin = distMin
         var tmax = distMax

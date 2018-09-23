@@ -8,10 +8,17 @@
 
 import Foundation
 
-let Width = 400     // Width of the generated image
-let Height = 266    // Height of the generated image
-let Samples = 100   // Number of rays for each pixel
-let DepthMax = 50   // Maximum number of scattered rays
+// Size of the generated image
+let Width = 400
+let Height = 266
+
+// The number of rounds of rendering.
+// Each round generates a Sample (= an image with float components), which is accumulated to the previous samples using a weighted average. The more samples, the less noisy is the final image. Of course, rendering time is linear with the number of samples.
+let Samples = 100
+
+// Maximum number of scattered rays.
+// When a ray hits an object, a scattered ray is emitted in the direction symetric to the incoming ray, relative to the normal of the object at the point hit, and so on, until no object is hit (= the ray "falls" into the sky). This may potentially never end, so we set a maximum count of scattered rays. In practice, this does not have much impact neither on the rendering time nor the quality, so you should keep the defaut value.
+let DepthMax = 50
 
 
 func backgroundColor(ray: Ray) -> Vec3 {
@@ -46,9 +53,14 @@ func toneMap(color: PixelRGB32) -> PixelRGBU8 {
 
 // *** Main ***
 
+// Scenes are currently described using structs conforming to the Scene protocol.
+// Since this is Swift code, the inconvenient is that Scene must be added to the project and compiled.
+// We could define an other format (e.g. based on JSON), but then it would need be parsed, and we would not have Xcode's autocompletion to help us!
 let scene = BigAndSmallSpheresScene(aspectRatio: Float(Width)/Float(Height))
 
 print("SwiftRay")
+
+// The final image is saved on the Desktop. This is OK on the Mac.
 let imagePath = "~/Desktop/Image.png"
 let url = URL(fileURLWithPath: NSString(string: imagePath).expandingTildeInPath)
 print("Generating image (\(Width) by \(Height)) at \(imagePath)")
@@ -57,6 +69,7 @@ let startDate = Date()
 let bitmap = Bitmap(width: Width, height: Height)
 let accumulator = ImageAccumulator()
 
+// This save() function takes a sample, accumulates it to the previous samples, applies tone mapping then saves it as PNG.
 func save(image: Image) {
     let accumulatedImage =  accumulator.accumulate(image: image)
     bitmap.generate { (x, y) -> PixelRGBU8 in
@@ -67,15 +80,16 @@ func save(image: Image) {
         print("Error saving image at \(imagePath).")
     }
 }
+
 func printProgress(sampleIndex: Int, sampleCount:Int) {
     let progress = (Float(sampleIndex+1)/Float(sampleCount))*100.0
     print("Sample \(sampleIndex+1)/\(sampleCount) (\(progress) %)")
 }
 
-
+// To take best advantage of multiple cores, one sample ought to be rendered on each core.
 let raytracingQueue = OperationQueue()
 raytracingQueue.name = "com.ceroce.SwiftRay Raytracing"
-raytracingQueue.maxConcurrentOperationCount = 4 // Parallel queue
+raytracingQueue.maxConcurrentOperationCount = 4 // Parallel queue. Set this to the number of cores of your Mac.
 
 let imageSavingQueue = OperationQueue()
 imageSavingQueue.name = "com.ceroce.SwiftRay Image Saving"
@@ -103,8 +117,8 @@ for _ in 0..<Samples {
     }
 }
 
+// Wait for all operations to finish
 while samplesRendered == 0 || (raytracingQueue.operationCount > 0) || (imageSavingQueue.operationCount > 0) {
-    // Wait
 }
 
 let renderingDuration = Date().timeIntervalSince(startDate)
