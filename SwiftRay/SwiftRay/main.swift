@@ -10,7 +10,7 @@ import Foundation
 
 let Width = 400     // Width of the generated image
 let Height = 266    // Height of the generated image
-let Samples = 500   // Number of rays for each pixel
+let Samples = 100   // Number of rays for each pixel
 let DepthMax = 50   // Maximum number of scattered rays
 
 
